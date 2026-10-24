@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5865f2">
+  <meta name="description" content="Discordコミュニティを見つけて、つながろう。MakuServer公式サーバー掲示板。">
+  <title>MakuServer — Discordサーバー掲示板</title>
+  <style>
+    :root{color-scheme:dark;--bg:#101116;--panel:#191a23;--panel2:#20222e;--line:#303241;--text:#f4f5fb;--muted:#a7a9ba;--accent:#7885ff;--accent2:#9aa3ff;--good:#62d6a6}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#333a7a55,transparent 40%),var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+    a{color:inherit}.wrap{width:min(1100px,calc(100% - 36px));margin:auto}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}.brand{font-size:1.1rem;font-weight:800;letter-spacing:.02em}.brand span{color:var(--accent2)}.nav small{color:var(--muted)}
+    .hero{padding:64px 0 38px}.eyebrow{color:var(--accent2);font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.hero h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.15;letter-spacing:-.04em;margin:12px 0 18px;max-width:780px}.hero p{color:var(--muted);max-width:650px;margin:0}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{border:0;border-radius:10px;padding:11px 17px;font:inherit;font-weight:750;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}.primary{background:var(--accent);color:white}.primary:hover{background:#6574f7}.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:26px 0 18px}.section-head h2{margin:0;font-size:1.35rem}.muted{color:var(--muted);font-size:.9rem}
+    .filters{display:grid;grid-template-columns:1fr 220px 180px;gap:10px;margin:16px 0 22px}.field{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:12px 13px;color:var(--text);font:inherit;min-width:0}.field:focus{outline:2px solid var(--accent);outline-offset:1px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.server{background:linear-gradient(145deg,#20222d,#181922);border:1px solid var(--line);border-radius:15px;padding:20px;display:flex;flex-direction:column;min-height:230px}.server-top{display:flex;justify-content:space-between;gap:12px;align-items:start}.server h3{margin:0;font-size:1.12rem;overflow-wrap:anywhere}.category{font-size:.76rem;color:var(--accent2);background:#7885ff1b;border:1px solid #7885ff42;padding:3px 9px;border-radius:99px;white-space:nowrap}.desc{color:#c2c4d2;margin:12px 0 16px;white-space:pre-wrap;overflow-wrap:anywhere}.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;margin-bottom:16px}.tag{font-size:.78rem;color:var(--muted);background:var(--panel2);border-radius:6px;padding:3px 8px}.join{align-self:start;background:var(--accent);color:#fff}.empty,.notice{background:var(--panel);border:1px dashed var(--line);padding:24px;border-radius:12px;color:var(--muted);text-align:center}.notice{display:none;margin:14px 0;text-align:left;border-style:solid}.notice.show{display:block}.form-wrap{margin:60px 0 40px;padding:26px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.form-wrap h2{margin:0 0 6px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.form-field{display:flex;flex-direction:column;gap:6px}.form-field label{font-size:.88rem;color:#d5d6e2;font-weight:650}.form-field.full{grid-column:1/-1}.help{font-size:.8rem;color:var(--muted)}textarea.field{resize:vertical;min-height:110px}.form-bottom{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px}.footer{border-top:1px solid #ffffff12;padding:24px 0 34px;color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    @media(max-width:720px){.filters{grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}.cards{grid-template-columns:1fr}.hero{padding-top:44px}.form-grid{grid-template-columns:1fr}.form-field.full{grid-column:auto}.form-wrap{padding:18px}.section-head{align-items:start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav"><a class="brand" href="/" style="text-decoration:none">Maku<span>Server</span></a><small>Discord Server Directory</small></header>
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Find your community</div>
+      <h1>あなたの居場所が、<br>きっと見つかる。</h1>
+      <p>ゲーム、創作、技術、雑談。気になるDiscordコミュニティを探して参加しよう。掲載申請は管理者の審査後に公開されます。</p>
+      <div class="actions"><a class="btn primary" href="#servers">サーバーを探す ↓</a><a class="btn secondary" href="#submit">サーバーを掲載する ＋</a></div>
+    </section>
+    <section id="servers">
+      <div class="section-head"><div><h2>公開中のサーバー</h2><div class="muted">新しいコミュニティを見つけよう</div></div><div class="muted" id="count">読み込み中…</div></div>
+      <div class="filters">
+        <input class="field" id="q" type="search" maxlength="100" placeholder="サーバー名・説明・タグで検索">
+        <select class="field" id="category"><option value="">すべてのカテゴリ</option></select>
+        <input class="field" id="tag" maxlength="30" placeholder="タグで絞り込み">
+      </div>
+      <div id="notice" class="notice" role="status"></div>
+      <div id="cards" class="cards"><div class="empty">サーバーを読み込んでいます…</div></div>
+    </section>
+    <section id="submit" class="form-wrap">
+      <h2>サーバーを掲載する</h2><p class="muted">必要事項を入力して申請してください。審査が完了すると一覧に公開されます。</p>
+      <div id="formNotice" class="notice" role="status"></div>
+      <form id="serverForm">
+        <div class="form-grid">
+          <div class="form-field"><label for="name">サーバー名 *</label><input class="field" id="name" name="name" required minlength="2" maxlength="80" placeholder="例：Makuゲーム部"></div>
+          <div class="form-field"><label for="categoryInput">カテゴリ *</label><select class="field" id="categoryInput" name="category" required></select></div>
+          <div class="form-field full"><label for="description">紹介文 *（10〜1000文字）</label><textarea class="field" id="description" name="description" required minlength="10" maxlength="1000" placeholder="どんなサーバーか、どんな人におすすめかを書いてください"></textarea></div>
+          <div class="form-field full"><label for="invite_url">Discord招待リンク *</label><input class="field" id="invite_url" name="invite_url" required maxlength="300" type="url" placeholder="https://discord.gg/xxxxxxxx"><span class="help">有効な招待リンクを入力してください。</span></div>
+          <div class="form-field full"><label for="tags">タグ（任意・カンマ区切り、最大8個）</label><input class="field" id="tags" name="tags" maxlength="240" placeholder="例：初心者歓迎, Minecraft, 雑談"><span class="help">タグは1個24文字まで。</span></div>
+          <div class="form-field full"><label for="owner_discord_id">申請者のDiscordユーザーID（任意）</label><input class="field" id="owner_discord_id" name="owner_discord_id" inputmode="numeric" pattern="[0-9]{17,20}" maxlength="20" placeholder="例：123456789012345678"><span class="help">申請について確認が必要な場合に使用します。プロフィール名ではなくユーザーIDです。</span></div>
+        </div>
+        <div class="form-bottom"><button class="btn primary" id="submitButton" type="submit">掲載を申請する</button><span class="help">投稿は審査が終わるまで公開されません。</span></div>
+      </form>
+    </section>
+  </main>
+  <footer class="wrap footer"><span>© <span id="year"></span> MakuServer Bulletin Board</span><span>Powered by Discord & Railway</span></footer>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (value) => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+let debounce;
+function showNotice(target, message, isError=false){target.textContent=message;target.classList.add("show");target.style.borderColor=isError?"#e87979":"#62d6a6";target.style.color=isError?"#ffaaaa":"#a7f0cf";}
+async function loadCategories(){
+  const res=await fetch("/api/categories"); const categories=await res.json();
+  for(const select of [$("category"),$("categoryInput")]){
+    for(const category of categories){const option=document.createElement("option");option.value=category;option.textContent=category;select.append(option);}
+  }
+}
+function renderServers(servers){
+  $("count").textContent=servers.length+" 件";
+  if(!servers.length){$("cards").innerHTML='<div class="empty" style="grid-column:1/-1">該当するサーバーがありません。検索条件を変えるか、最初のサーバーを申請してください。</div>';return;}
+  $("cards").innerHTML=servers.map(s=>'<article class="server"><div class="server-top"><h3>'+esc(s.name)+'</h3><span class="category">'+esc(s.category)+'</span></div><p class="desc">'+esc(s.description)+'</p><div class="tags">'+(s.tags||[]).map(t=>'<span class="tag">#'+esc(t)+'</span>').join("")+'</div><a class="btn join" href="'+esc(s.invite_url)+'" target="_blank" rel="noopener noreferrer">Discordに参加 ↗</a></article>').join("");
+}
+async function loadServers(){
+  const params=new URLSearchParams();
+  if($("q").value.trim())params.set("q",$("q").value.trim());
+  if($("category").value)params.set("category",$("category").value);
+  if($("tag").value.trim())params.set("tag",$("tag").value.trim());
+  try{
+    const res=await fetch("/api/servers?"+params.toString());
+    if(!res.ok)throw new Error("一覧を取得できませんでした。");
+    renderServers(await res.json());
+  }catch(e){$("cards").innerHTML='<div class="empty" style="grid-column:1/-1">サーバー一覧を取得できませんでした。時間をおいて再度お試しください。</div>';$("count").textContent="—";}
+}
+for(const id of ["q","tag"]){$(id).addEventListener("input",()=>{clearTimeout(debounce);debounce=setTimeout(loadServers,250);});}
+$("category").addEventListener("change",loadServers);
+$("serverForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const button=$("submitButton");button.disabled=true;button.textContent="送信中…";
+  $("formNotice").classList.remove("show");
+  const form=new FormData(event.currentTarget);const data=Object.fromEntries(form.entries());
+  data.tags=data.tags.split(",").map(t=>t.trim()).filter(Boolean);
+  try{
+    const res=await fetch("/api/servers",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+    const result=await res.json();
+    if(!res.ok)throw new Error(result.error||"申請に失敗しました。");
+    showNotice($("formNotice"),result.message);
+    event.currentTarget.reset();
+  }catch(e){showNotice($("formNotice"),e.message,true);}
+  finally{button.disabled=false;button.textContent="掲載を申請する";}
+});
+$("year").textContent=new Date().getFullYear();
+loadCategories().then(loadServers).catch(()=>showNotice($("notice"),"カテゴリの読み込みに失敗しました。",true));
+</script>
+</body>
+</html>
