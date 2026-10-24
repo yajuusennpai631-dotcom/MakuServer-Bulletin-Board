@@ -1,0 +1,19 @@
+{
+  "name": "makuserver-bulletin-board",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Discord server directory with Discord bot moderation, built for Railway",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "check": "node --check src/index.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "pg": "^8.13.1"
+  }
+}
