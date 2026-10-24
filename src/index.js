@@ -102,7 +102,7 @@ app.post("/api/servers", async (req, res, next) => {
     if (!validInvite(invite_url)) return res.status(400).json({ error: "有効な Discord 招待 URL を入力してください。" });
     if (owner_discord_id && !/^\d{17,20}$/.test(owner_discord_id)) return res.status(400).json({ error: "DiscordユーザーIDの形式が正しくありません。" });
     const result = await pool.query(
-      "INSERT INTO servers (name, description, invite_url, category, tags, owner_discord_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id, name, status, created_at",
+      "INSERT INTO servers (name, description, invite_url, category, tags, owner_discord_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id, name, description, invite_url, category, tags, status, created_at",
       [name, description, invite_url, category, tags, owner_discord_id]
     );
     const server = result.rows[0];
